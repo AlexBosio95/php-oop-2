@@ -9,6 +9,8 @@ Class DataAgency {
     public $Photo = null;
     protected $ProductPrice;
     protected $ProductRentalPrice;
+    public $PubblicPrice;
+    public $PubblicRentalPrice;
 
 
     public function __construct($Name, $Desc, $Year, $Position, $Price, $Months = 0, $PathPhoto)
@@ -17,9 +19,11 @@ Class DataAgency {
         $this->ProductDescription = $Desc;
         $this->ProductYear = $Year;
         $this->ProductPosition = $Position;
-        $this->ProductPrice = $this->getPrice($Price);
-        $this->ProductRentalPrice = $this->getRentalPrice($this->ProductPrice, $Months);
+        $this->ProductPrice = $Price;
+        $this->PubblicRentalPrice = $this->getRentalPrice($Price, $Months);
+        $this->PubblicPrice = $this->getPrice($Price);
         $this->Photo = $PathPhoto;
+
     }
 
 
@@ -33,7 +37,9 @@ Class DataAgency {
     }
 
     public function getRentalPrice($TotalPrice, $Months){
-        return round(($TotalPrice / 4) / $Months );
+        $PriceIVA = $this->getPrice($TotalPrice);
+
+        return round(($PriceIVA / 4) / $Months );
     }
 
 }
