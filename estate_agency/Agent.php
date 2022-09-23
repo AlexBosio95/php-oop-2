@@ -5,6 +5,10 @@ require_once __DIR__ . '/Data.php';
 
 class AgentData{
     use DataInfo;
+
+    private $IDAgent;
+    public $SalesNumber;
+
 }
 
 ?>
